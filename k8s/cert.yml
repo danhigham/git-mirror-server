@@ -1,0 +1,19 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: scratch-cert
+  namespace: scratch
+spec:
+  secretName: scratch-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - scratch.high.am
+  acme:
+    config:
+    - dns01:
+        provider: clouddns
+      domains:
+      - scratch.high.am

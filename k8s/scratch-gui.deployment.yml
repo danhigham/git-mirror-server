@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: scratch-gui
+  name: scratch-gui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scratch-gui
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: scratch-gui
+    spec:
+      containers:
+      - image: harbor.high.am/scratch/scratch-gui
+        name: scratch-gui
+        ports:
+        - containerPort: 80
+        resources: {}

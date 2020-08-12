@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: scratch-mirror
+  name: scratch-mirror
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scratch-mirror
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: scratch-mirror
+    spec:
+      containers:
+      - image: harbor.high.am/scratch/scratch-mirror
+        name: scratch-mirror-server
+        ports:
+        - containerPort: 3000
+        resources: {}
+        env:
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: scratch-datastore-redis
+              key: redis-password
+        - name: REDIS_HOST
+          value: scratch-datastore-redis-master
+
+
